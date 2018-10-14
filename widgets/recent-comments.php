@@ -51,7 +51,7 @@ class garfunkel_recent_comments extends WP_Widget {
 					
 						<li>
 							
-							<a href="<?php echo get_permalink( $comment->comment_post_ID ); ?>#comment-<?php echo $comment->comment_ID; ?>" title="<?php printf( _x( 'Comment to %s, posted %s', 'Variables: post title, date', 'garfunkel' ), the_title_attribute( array( 'post' => $comment->comment_post_ID ) ),get_the_time( get_option( 'date_format' ) ) ); ?>">
+							<a href="<?php echo get_permalink( $comment->comment_post_ID ); ?>#comment-<?php echo $comment->comment_ID; ?>" title="<?php printf( _x( 'Comment to %1$s, posted %2$s', 'Variables: post title, date', 'garfunkel' ), the_title_attribute( array( 'post' => $comment->comment_post_ID ) ),get_the_time( get_option( 'date_format' ) ) ); ?>">
 								
 								<div class="post-icon">
 								

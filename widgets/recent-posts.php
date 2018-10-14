@@ -58,7 +58,7 @@ class garfunkel_recent_posts extends WP_Widget {
 								<div class="post-icon">
 								
 									<?php 
-									$post_format = get_post_format() ?: 'standard'; 
+									$post_format = get_post_format() ? get_post_format() : 'standard'; 
 									
 									if ( has_post_thumbnail() ) {
 									

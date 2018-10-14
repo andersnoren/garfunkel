@@ -84,13 +84,17 @@
 					
 						<div class="featured-media">
 						
-							<?php the_post_thumbnail( 'post-image' ); ?>
+							<?php 
+								
+							the_post_thumbnail( 'post-image' );
+
+							$image_caption = get_post( get_post_thumbnail_id() )->post_excerpt;
 							
-							<?php if ( ! empty( get_post( get_post_thumbnail_id() )->post_excerpt ) ) : ?>
+							if ( $image_caption ) : ?>
 											
 								<div class="media-caption-container">
 								
-									<p class="media-caption"><?php echo get_post( get_post_thumbnail_id() )->post_excerpt; ?></p>
+									<p class="media-caption"><?php echo $image_caption; ?></p>
 									
 								</div>
 								
@@ -340,9 +344,9 @@
 													?>
 												
 													<li>
-														<a href="<?php echo get_permalink( $comment->ID ); ?>#comment-<?php echo $comment->comment_ID; ?>" title="<?php printf( _x( 'Posted on %s to %s', 'Variables: date and post title', 'garfunkel' ), get_comment_date( get_option( 'date_format' ), $comment->comment_ID ), the_title_attribute( array( 'echo' => false, 'post' => $comment->comment_post_ID ) ) ); ?>">
+														<a href="<?php echo get_permalink( $comment->ID ); ?>#comment-<?php echo $comment->comment_ID; ?>" title="<?php printf( _x( 'Posted on %1$s to %2$s', 'Variables: date and post title', 'garfunkel' ), get_comment_date( get_option( 'date_format' ), $comment->comment_ID ), the_title_attribute( array( 'echo' => false, 'post' => $comment->comment_post_ID ) ) ); ?>">
 															<div class="post-icon">
-																<?php echo get_the_post_thumbnail( $comment->comment_post_ID, 'thumbnail' ) ?: '<div class="genericon genericon-comment"></div>'; ?>
+																<?php echo get_the_post_thumbnail( $comment->comment_post_ID, 'thumbnail' ) ? get_the_post_thumbnail( $comment->comment_post_ID, 'thumbnail' ) : '<div class="genericon genericon-comment"></div>'; ?>
 															</div>
 															<h5 class="title"><?php echo get_the_title( $comment->comment_post_ID ); ?></h5>
 															<p class="excerpt"><?php echo $comment_excerpt; ?></p>

@@ -15,6 +15,8 @@ if ( ! function_exists( 'garfunkel_setup' ) ) :
 			
 		// Post thumbnails
 		add_theme_support( 'post-thumbnails' );
+
+		// Image sizes
 		add_image_size( 'post-image', 1140, 9999 );
 		add_image_size( 'post-thumbnail', 552, 9999 );
 		
@@ -49,12 +51,6 @@ if ( ! function_exists( 'garfunkel_setup' ) ) :
 		// Make the theme translation ready
 		load_theme_textdomain('garfunkel', get_template_directory() . '/languages');
 		
-		$locale = get_locale();
-		$locale_file = get_template_directory() . "/languages/$locale.php";
-		if ( is_readable( $locale_file ) ) {
-			require_once( $locale_file );
-		}
-		
 	}
 	add_action( 'after_setup_theme', 'garfunkel_setup' );
 
@@ -71,10 +67,9 @@ if ( ! function_exists( 'garfunkel_load_javascript_files' ) ) :
 	function garfunkel_load_javascript_files() {
 
 		if ( ! is_admin() ) {
-			wp_register_script( 'garfunkel_imagesloaded', get_template_directory_uri().'/js/imagesloaded.pkgd.js', array('jquery'), '', true );
-			wp_register_script( 'garfunkel_flexslider', get_template_directory_uri().'/js/flexslider.min.js', array('jquery'), '', true );
+			wp_register_script( 'garfunkel_flexslider', get_template_directory_uri() . '/js/flexslider.js', array(), '', true );
 
-			wp_enqueue_script( 'garfunkel_global', get_template_directory_uri() . '/js/global.js', array( 'jquery', 'garfunkel_imagesloaded', 'masonry', 'garfunkel_flexslider' ), '', true );
+			wp_enqueue_script( 'garfunkel_global', get_template_directory_uri() . '/js/global.js', array( 'jquery', 'imagesloaded', 'masonry', 'garfunkel_flexslider' ), '', true );
 			
 			if ( is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' );
 		}
@@ -92,12 +87,33 @@ endif;
 if ( ! function_exists( 'garfunkel_load_style' ) ) :
 
 	function garfunkel_load_style() {
-		if ( ! is_admin() ) {
-			wp_register_style( 'garfunkel_googleFonts', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,700italic|Playfair+Display:400,900|Crimson+Text:700,400italic,700italic,400' );
-			wp_register_style( 'garfunkel_genericons', get_template_directory_uri() . '/genericons/genericons.css' );
 
-			wp_enqueue_style( 'garfunkel_style', get_stylesheet_uri(), array( 'garfunkel_googleFonts', 'garfunkel_genericons' ) );
+		if ( ! is_admin() ) {
+
+			$dependencies = array();
+
+			/**
+			 * Translators: If there are characters in your language that are not
+			 * supported by the theme fonts, translate this to 'off'. Do not translate
+			 * into your own language.
+			 */
+			$google_fonts = _x( 'on', 'Google Fonts: on or off', 'garfunkel' );
+
+			if ( 'off' !== $google_fonts ) {
+
+				// Register Google Fonts
+				wp_register_style( 'garfunkel_googleFonts', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,700italic|Playfair+Display:400,900|Crimson+Text:700,400italic,700italic,400' );
+				$dependencies[] = 'garfunkel_googleFonts';
+
+			}
+
+			wp_register_style( 'garfunkel_genericons', get_template_directory_uri() . '/genericons/genericons.css' );
+			$dependencies[] = 'garfunkel_genericons';
+
+			wp_enqueue_style( 'garfunkel_style', get_stylesheet_uri(), $dependencies );
+
 		}
+
 	}
 	add_action( 'wp_print_styles', 'garfunkel_load_style' );
 
@@ -112,9 +128,23 @@ endif;
 if ( ! function_exists( 'garfunkel_add_editor_styles' ) ) :
 
 	function garfunkel_add_editor_styles() {
+
 		add_editor_style( 'garfunkel-editor-style.css' );
-		$font_url = '//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,400italic,700,700italic,300';
-		add_editor_style( str_replace( ',', '%2C', $font_url ) );
+
+		/**
+		 * Translators: If there are characters in your language that are not
+		 * supported by the theme fonts, translate this to 'off'. Do not translate
+		 * into your own language.
+		 */
+		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'garfunkel' );
+
+		if ( 'off' !== $google_fonts ) {
+
+			$font_url = '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,700italic|Playfair+Display:400,900|Crimson+Text:700,400italic,700italic,400';
+			add_editor_style( str_replace( ',', '%2C', $font_url ) );
+
+		}
+
 	}
 	add_action( 'init', 'garfunkel_add_editor_styles' );
 
@@ -272,7 +302,7 @@ if ( ! function_exists( 'garfunkel_body_classes' ) ) :
 		$classes[] = has_post_thumbnail() ? 'has-featured-image' : 'no-featured-image';
 
 		// First page of home
-		$paged = get_query_var( 'paged' ) ?: 1;
+		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 		if ( is_home() && ( $paged == 1 ) ) {
 			$classes[] = 'home-first-page';
 		}
@@ -408,7 +438,7 @@ if ( ! function_exists( 'garfunkel_meta' ) ) :
 			</a>
 
 			<?php if ( comments_open() ) : ?>
-				<a class="post-meta-comments" href="<?php the_permalink(); ?>#comments" title="<?php printf( __( '%s comments to %s', 'garfunkel' ), get_comments_number(), the_title_attribute( array( 'echo' => false ) ) ); ?>">
+				<a class="post-meta-comments" href="<?php the_permalink(); ?>#comments" title="<?php printf( __( '%1$s comments to %2$s', 'garfunkel' ), get_comments_number(), the_title_attribute( array( 'echo' => false ) ) ); ?>">
 					<div class="genericon genericon-comment"></div>
 					<?php comments_number( '0', '1', '%'); ?>
 				</a>
@@ -489,7 +519,6 @@ endif;
 if ( ! function_exists( 'garfunkel_comment' ) ) :
 
 	function garfunkel_comment( $comment, $args, $depth ) {
-		$GLOBALS['comment'] = $comment;
 		switch ( $comment->comment_type ) :
 			case 'pingback' :
 			case 'trackback' :
@@ -631,83 +660,86 @@ class Garfunkel_Customize {
    }
 
    public static function header_output() {
-      ?>
       
-	      <!--Customizer CSS--> 
+		echo '<!--Customizer CSS-->';
+		echo '<style type="text/css">';
+
+			self::generate_css( 'body a', 'color', 'accent_color' );
+			self::generate_css( 'body a:hover', 'color', 'accent_color' );
+
+			self::generate_css( '.blog-title a:hover', 'color', 'accent_color' );
+			self::generate_css( '.menu-social a:hover', 'background-color', 'accent_color' );
+			self::generate_css( '.sticky.post .is-sticky', 'background-color', 'accent_color' );
+			self::generate_css( '.sticky.post .is-sticky:before', 'border-top-color', 'accent_color' );
+			self::generate_css( '.sticky.post .is-sticky:before', 'border-left-color', 'accent_color' );
+			self::generate_css( '.sticky.post .is-sticky:after', 'border-top-color', 'accent_color' );
+			self::generate_css( '.sticky.post .is-sticky:after', 'border-right-color', 'accent_color' );
+			self::generate_css( '.post-title a:hover', 'color', 'accent_color' );
+			self::generate_css( '.post-quote', 'background', 'accent_color' );
+			self::generate_css( '.post-link', 'background', 'accent_color' );
+
+			self::generate_css( '.post-content a', 'color', 'accent_color' );
+			self::generate_css( '.post-content a:hover', 'color', 'accent_color' );
+			self::generate_css( '.post-content fieldset legend', 'background', 'accent_color' );
+			self::generate_css( '.post-content input[type="button"]:hover', 'background', 'accent_color' );
+			self::generate_css( '.post-content input[type="reset"]:hover', 'background', 'accent_color' );
+			self::generate_css( '.post-content input[type="submit"]:hover', 'background', 'accent_color' );
+
+			self::generate_css( '.post-nav-fixed a:hover', 'background', 'accent_color' );
+			self::generate_css( '.tab-post-meta .post-nav a:hover h4', 'color', 'accent_color' );
+			self::generate_css( '.post-info-items a:hover', 'color', 'accent_color' );
+			self::generate_css( '.page-links a', 'color', 'accent_color' );
+			self::generate_css( '.page-links a:hover', 'background', 'accent_color' );
+			self::generate_css( '.author-name a:hover', 'color', 'accent_color' );
+			self::generate_css( '.content-by', 'color', 'accent_color' );
+			self::generate_css( '.author-content a:hover .title', 'color', 'accent_color' );
+			self::generate_css( '.author-content a:hover .post-icon', 'background', 'accent_color' );
+			self::generate_css( '.comment-notes a', 'color', 'accent_color' );
+			self::generate_css( '.comment-notes a:hover', 'color', 'accent_color' );
+			self::generate_css( '.content #respond input[type="submit"]', 'background-color', 'accent_color' );
+			self::generate_css( '.comment-header h4 a', 'color', 'accent_color' );
+			self::generate_css( '.bypostauthor > .comment:before', 'background', 'accent_color' );
+			self::generate_css( '.comment-actions a:hover', 'color', 'accent_color' );
+			self::generate_css( '#cancel-comment-reply-link', 'color', 'accent_color' );
+			self::generate_css( '#cancel-comment-reply-link:hover', 'color', 'accent_color' );
+			self::generate_css( '.comments-nav a:hover', 'color', 'accent_color' );
+
+			self::generate_css( '.widget-title a', 'color', 'accent_color' );
+			self::generate_css( '.widget-title a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_text a', 'color', 'accent_color' );
+			self::generate_css( '.widget_text a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_rss li a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_archive li a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_meta li a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_pages li a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_links li a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_categories li a:hover', 'color', 'accent_color' );
+			self::generate_css( '.widget_rss .widget-content ul a.rsswidget:hover', 'color', 'accent_color' );
+			self::generate_css( '#wp-calendar a', 'color', 'accent_color' );
+			self::generate_css( '#wp-calendar a:hover', 'color', 'accent_color' );
+			self::generate_css( '#wp-calendar thead', 'color', 'accent_color' );
+			self::generate_css( '#wp-calendar tfoot a:hover', 'color', 'accent_color' );
+			self::generate_css( '.tagcloud a:hover', 'background', 'accent_color' );
+			self::generate_css( '.widget_garfunkel_recent_posts a:hover .title', 'color', 'accent_color' );
+			self::generate_css( '.widget_garfunkel_recent_posts a:hover .post-icon', 'background', 'accent_color' );
+			self::generate_css( '.widget_garfunkel_recent_comments a:hover .title', 'color', 'accent_color' );
+			self::generate_css( '.widget_garfunkel_recent_comments a:hover .post-icon', 'background', 'accent_color' );
+			self::generate_css( '.mobile-menu a:hover', 'background', 'accent_color' );
+			self::generate_css( '.mobile-menu-container .menu-social a:hover', 'background', 'accent_color' );
+
+			self::generate_css( 'body#tinymce.wp-editor a', 'color', 'accent_color' );
+			self::generate_css( 'body#tinymce.wp-editor fieldset legend', 'background', 'accent_color' );
+			self::generate_css( 'body#tinymce.wp-editor input[type="submit"]:hover', 'background', 'accent_color' );
+			self::generate_css( 'body#tinymce.wp-editor input[type="reset"]:hover', 'background', 'accent_color' );
+			self::generate_css( 'body#tinymce.wp-editor input[type="button"]:hover', 'background', 'accent_color' );
+
+		echo '</style>';
+		echo '<!--/Customizer CSS-->';
 	      
-	      <style type="text/css">
-	           <?php self::generate_css('body a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('body a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.blog-title a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.menu-social a:hover', 'background-color', 'accent_color'); ?>
-	           <?php self::generate_css('.sticky.post .is-sticky', 'background-color', 'accent_color'); ?>
-	           <?php self::generate_css('.sticky.post .is-sticky:before', 'border-top-color', 'accent_color'); ?>
-	           <?php self::generate_css('.sticky.post .is-sticky:before', 'border-left-color', 'accent_color'); ?>
-	           <?php self::generate_css('.sticky.post .is-sticky:after', 'border-top-color', 'accent_color'); ?>
-	           <?php self::generate_css('.sticky.post .is-sticky:after', 'border-right-color', 'accent_color'); ?>
-	           <?php self::generate_css('.post-title a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.post-quote', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.post-link', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.post-content a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.post-content a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.post-content fieldset legend', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.post-content input[type="button"]:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.post-content input[type="reset"]:hover', 'background', 'accent_color'); ?>	           
-	           <?php self::generate_css('.post-content input[type="submit"]:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.post-nav-fixed a:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.tab-post-meta .post-nav a:hover h4', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.post-info-items a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.page-links a', 'color', 'accent_color'); ?>	           
-	           <?php self::generate_css('.page-links a:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.author-name a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.content-by', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.author-content a:hover .title', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.author-content a:hover .post-icon', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.comment-notes a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.comment-notes a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.content #respond input[type="submit"]', 'background-color', 'accent_color'); ?>
-	           <?php self::generate_css('.comment-header h4 a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.bypostauthor > .comment:before', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.comment-actions a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('#cancel-comment-reply-link', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('#cancel-comment-reply-link:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.comments-nav a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget-title a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget-title a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_text a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_text a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_rss li a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_archive li a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_meta li a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_pages li a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_links li a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_categories li a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_rss .widget-content ul a.rsswidget:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('#wp-calendar a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('#wp-calendar a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('#wp-calendar thead', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('#wp-calendar tfoot a:hover', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.tagcloud a:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_garfunkel_recent_posts a:hover .title', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_garfunkel_recent_posts a:hover .post-icon', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_garfunkel_recent_comments a:hover .title', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('.widget_garfunkel_recent_comments a:hover .post-icon', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.mobile-menu a:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('.mobile-menu-container .menu-social a:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('body#tinymce.wp-editor a', 'color', 'accent_color'); ?>
-	           <?php self::generate_css('body#tinymce.wp-editor fieldset legend', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('body#tinymce.wp-editor input[type="submit"]:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('body#tinymce.wp-editor input[type="reset"]:hover', 'background', 'accent_color'); ?>
-	           <?php self::generate_css('body#tinymce.wp-editor input[type="button"]:hover', 'background', 'accent_color'); ?>
-	      </style> 
-	      
-	      <!--/Customizer CSS-->
-	      
-      <?php
    }
    
    public static function live_preview() {
-      wp_enqueue_script( 'garfunkel_themecustomizer', get_template_directory_uri() . '/js/theme-customizer.js', array(  'jquery', 'customize-preview' ), '', true );
+      wp_enqueue_script( 'garfunkel_themecustomizer', get_template_directory_uri() . '/js/theme-customizer.js', array( 'jquery', 'customize-preview' ), '', true );
    }
 
    public static function generate_css( $selector, $style, $mod_name, $prefix='', $postfix='', $echo=true ) {
@@ -728,12 +760,132 @@ class Garfunkel_Customize {
 }
 
 // Setup the Theme Customizer settings and controls...
-add_action( 'customize_register' , array( 'Garfunkel_Customize' , 'register' ) );
+add_action( 'customize_register', array( 'Garfunkel_Customize', 'register' ) );
 
 // Output custom CSS to live site
-add_action( 'wp_head' , array( 'Garfunkel_Customize' , 'header_output' ) );
+add_action( 'wp_head', array( 'Garfunkel_Customize', 'header_output' ) );
 
 // Enqueue live preview javascript in Theme Customizer admin screen
-add_action( 'customize_preview_init' , array( 'Garfunkel_Customize' , 'live_preview' ) );
+add_action( 'customize_preview_init', array( 'Garfunkel_Customize', 'live_preview' ) );
+
+
+/* ---------------------------------------------------------------------------------------------
+   SPECIFY GUTENBERG SUPPORT
+------------------------------------------------------------------------------------------------ */
+
+
+if ( ! function_exists( 'garfunkel_add_gutenberg_features' ) ) :
+
+	function garfunkel_add_gutenberg_features() {
+
+		/* Gutenberg Features --------------------------------------- */
+
+		add_theme_support( 'align-wide' );
+
+		/* Gutenberg Palette --------------------------------------- */
+
+		$accent_color = get_theme_mod( 'accent_color' ) ? get_theme_mod( 'accent_color' ) : '#ca2017';
+
+		add_theme_support( 'editor-color-palette', array(
+			array(
+				'name' 	=> _x( 'Accent', 'Name of the accent color in the Gutenberg palette', 'garfunkel' ),
+				'slug' 	=> 'accent',
+				'color' => $accent_color,
+			),
+			array(
+				'name' 	=> _x( 'Black', 'Name of the black color in the Gutenberg palette', 'garfunkel' ),
+				'slug' 	=> 'black',
+				'color' => '#222',
+			),
+			array(
+				'name' 	=> _x( 'Dark Gray', 'Name of the dark gray color in the Gutenberg palette', 'garfunkel' ),
+				'slug' 	=> 'dark-gray',
+				'color' => '#444',
+			),
+			array(
+				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Gutenberg palette', 'garfunkel' ),
+				'slug' 	=> 'medium-gray',
+				'color' => '#666',
+			),
+			array(
+				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Gutenberg palette', 'garfunkel' ),
+				'slug' 	=> 'light-gray',
+				'color' => '#888',
+			),
+			array(
+				'name' 	=> _x( 'White', 'Name of the white color in the Gutenberg palette', 'garfunkel' ),
+				'slug' 	=> 'white',
+				'color' => '#fff',
+			),
+		) );
+
+		/* Gutenberg Font Sizes --------------------------------------- */
+
+		add_theme_support( 'editor-font-sizes', array(
+			array(
+				'name' 		=> _x( 'Small', 'Name of the small font size in Gutenberg', 'garfunkel' ),
+				'shortName' => _x( 'S', 'Short name of the small font size in the Gutenberg editor.', 'garfunkel' ),
+				'size' 		=> 18,
+				'slug' 		=> 'small',
+			),
+			array(
+				'name' 		=> _x( 'Regular', 'Name of the regular font size in Gutenberg', 'garfunkel' ),
+				'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'garfunkel' ),
+				'size' 		=> 22,
+				'slug' 		=> 'regular',
+			),
+			array(
+				'name' 		=> _x( 'Large', 'Name of the large font size in Gutenberg', 'garfunkel' ),
+				'shortName' => _x( 'L', 'Short name of the large font size in the Gutenberg editor.', 'garfunkel' ),
+				'size' 		=> 27,
+				'slug' 		=> 'large',
+			),
+			array(
+				'name' 		=> _x( 'Larger', 'Name of the larger font size in Gutenberg', 'garfunkel' ),
+				'shortName' => _x( 'XL', 'Short name of the larger font size in the Gutenberg editor.', 'garfunkel' ),
+				'size' 		=> 35,
+				'slug' 		=> 'larger',
+			),
+		) );
+
+	}
+	add_action( 'after_setup_theme', 'garfunkel_add_gutenberg_features' );
+
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   GUTENBERG EDITOR STYLES
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'garfunkel_block_editor_styles' ) ) :
+
+	function garfunkel_block_editor_styles() {
+
+		$dependencies = array();
+
+		/**
+		 * Translators: If there are characters in your language that are not
+		 * supported by the theme fonts, translate this to 'off'. Do not translate
+		 * into your own language.
+		 */
+		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'garfunkel' );
+
+		if ( 'off' !== $google_fonts ) {
+
+			// Register Google Fonts
+			wp_register_style( 'garfunkel-block-editor-styles-font', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,700italic|Playfair+Display:400,900|Crimson+Text:700,400italic,700italic,400', false, 1.0, 'all' );
+			$dependencies[] = 'garfunkel-block-editor-styles-font';
+
+		}
+
+		// Enqueue the editor styles
+		wp_enqueue_style( 'garfunkel-block-editor-styles', get_theme_file_uri( '/garfunkel-gutenberg-editor-style.css' ), $dependencies, '1.0', 'all' );
+
+	}
+	add_action( 'enqueue_block_editor_assets', 'garfunkel_block_editor_styles', 1 );
+
+endif;
 
 ?>

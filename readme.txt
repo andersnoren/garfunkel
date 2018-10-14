@@ -118,6 +118,25 @@ The rest of the content...
 == Changelog ==
 
 
+Version 1.14 (2018-10-14)
+-------------------------
+- Updated with Gutenberg support
+	- Gutenberg editor styles
+	- Styling of Gutenberg blocks
+	- Custom Garfunkel Gutenberg palette
+	- Custom Garfunkel Gutenberg typography styles
+- Added option to disable Google Fonts with a translateable string
+- Updated theme description
+- Improved compatibility with < PHP 5.5
+- Fixed incorrect Google Fonts kit being included for the editor styles
+- Replaced minified Flexslider file with non-minified version
+- Removed theme version of imagesLoaded and enqueued the bundled WP version instead
+- Cleaned out some old vendor specific CSS
+
+Version 1.13 (2018-05-24)
+-------------------------
+- Fixed styling of cookie checkbox in comments
+
 Version 1.12 (2017-12-03)
 -------------------------
 - Updated author description on single to work with new wrapping paragraph

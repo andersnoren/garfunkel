@@ -72,7 +72,7 @@
 		
 		<div class="title-section">
 
-			<?php $header_image_url = get_header_image() ?: get_template_directory_uri() . '/images/bg.jpg'; ?>
+			<?php $header_image_url = get_header_image() ? get_header_image() : get_template_directory_uri() . '/images/bg.jpg'; ?>
 			
 			<div class="bg-image master" style="background-image: url( <?php echo $header_image_url; ?> );"></div>
 			
