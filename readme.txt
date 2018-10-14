@@ -118,6 +118,10 @@ The rest of the content...
 == Changelog ==
 
 
+Version 1.15 (2018-10-14)
+-------------------------
+- Fixed accent color for links in the Gutenberg editor styles
+
 Version 1.14 (2018-10-14)
 -------------------------
 - Updated with Gutenberg support

@@ -685,6 +685,9 @@ class Garfunkel_Customize {
 			self::generate_css( '.post-content input[type="reset"]:hover', 'background', 'accent_color' );
 			self::generate_css( '.post-content input[type="submit"]:hover', 'background', 'accent_color' );
 
+			self::generate_css( '.post-content .has-accent-color', 'color', 'accent_color' );
+			self::generate_css( '.post-content .has-accent-background-color', 'background-color', 'accent_color' );
+
 			self::generate_css( '.post-nav-fixed a:hover', 'background', 'accent_color' );
 			self::generate_css( '.tab-post-meta .post-nav a:hover h4', 'color', 'accent_color' );
 			self::generate_css( '.post-info-items a:hover', 'color', 'accent_color' );
