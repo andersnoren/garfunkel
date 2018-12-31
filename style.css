@@ -2,7 +2,7 @@
 
 	Theme Name: Garfunkel
     Text Domain: garfunkel
-	Version: 1.15
+	Version: 1.17
 	Description: Garfunkel is a stylish and responsive Pinterest-style theme with Masonry layout. It features responsive and retina-ready design, support for six post formats (including a gallery slideshow), Gutenberg support, six custom widgets, two page templates, Jetpack Infinite Scroll support, editor styling and translation-ready code. Demo: http://www.andersnoren.se/themes/garfunkel/
 	Tags: blog, three-columns, custom-colors, custom-header, custom-menu, editor-style, featured-images, footer-widgets, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio
 	Author: Anders Norén
@@ -90,13 +90,13 @@ input[type="search"]::-webkit-search-results-decoration {
 
 
 body {
-	margin: 0;
-	padding: 0;
+	background-color: #111;
 	border: none;
 	color: #444;
 	font-family: 'Fira Sans', sans-serif;
 	font-size: 18px;
-	background-color: #111;
+	margin: 0;
+	padding: 0;
 }
 
 body * { -webkit-font-smoothing: antialiased; }
@@ -1821,13 +1821,13 @@ img.alignright,
 
 /* Gutenberg Accent Colors --------------------------------------- */
 
-.post-content .has-background { background-color: #272F38; }
+.post-content .has-background { background-color: #222; }
 
 .post-content .has-accent-color { color: #ca2017; }
 .post-content .has-accent-background-color { background-color: #ca2017; }
 
-.post-content .has-black-color { color: #272F38; }
-.post-content .has-black-background-color { background-color: #272F38; }
+.post-content .has-black-color { color: #222; }
+.post-content .has-black-background-color { background-color: #222; }
 
 .post-content .has-dark-gray-color { color: #444; }
 .post-content .has-dark-gray-background-color { background-color: #444; }

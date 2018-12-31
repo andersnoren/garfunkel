@@ -834,19 +834,19 @@ if ( ! function_exists( 'garfunkel_add_gutenberg_features' ) ) :
 			array(
 				'name' 		=> _x( 'Regular', 'Name of the regular font size in Gutenberg', 'garfunkel' ),
 				'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'garfunkel' ),
-				'size' 		=> 22,
+				'size' 		=> 21,
 				'slug' 		=> 'regular',
 			),
 			array(
 				'name' 		=> _x( 'Large', 'Name of the large font size in Gutenberg', 'garfunkel' ),
 				'shortName' => _x( 'L', 'Short name of the large font size in the Gutenberg editor.', 'garfunkel' ),
-				'size' 		=> 27,
+				'size' 		=> 25,
 				'slug' 		=> 'large',
 			),
 			array(
 				'name' 		=> _x( 'Larger', 'Name of the larger font size in Gutenberg', 'garfunkel' ),
 				'shortName' => _x( 'XL', 'Short name of the larger font size in the Gutenberg editor.', 'garfunkel' ),
-				'size' 		=> 35,
+				'size' 		=> 30,
 				'slug' 		=> 'larger',
 			),
 		) );
