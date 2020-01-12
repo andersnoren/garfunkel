@@ -117,6 +117,14 @@ The rest of the content...
 
 == Changelog ==
 
+Version 1.19 (2019-04-07)
+-------------------------
+- Added the new wp_body_open() function, along with a function_exists check
+
+Version 1.18 (2019-01-24)
+-------------------------
+- Fixed the date output on the archive page template
+
 Version 1.17 (2018-12-07)
 -------------------------
 - Fixed Gutenberg style changes required due to changes in the block editor CSS and classes
