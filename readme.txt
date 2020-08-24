@@ -1,8 +1,9 @@
 === Garfunkel ===
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
-Requires at least: 4.4
-Tested up to: 5.0
+Requires at least: 4.5
+Tested up to: 5.5
+Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -116,6 +117,59 @@ The rest of the content...
 
 
 == Changelog ==
+
+Version 2.0.0 (2020-08-XX)
+-------------------------
+- Added "Requires PHP" tag.
+- Updated "Tested up to" to 5.5.
+- Updated "Requires at least" to 4.5, since Garfunkel is now using the `custom_logo` setting.
+- Added "Requires PHP" and "Tested up to" to style.css.
+- Added theme tags: block-styles, wide-blocks.
+- Deleted the languages folder and license.txt.
+- Removed live preview from the Customizer.
+- Minified flexslider.js (unminified version still included).
+- Minified genericons.css (unminified version still included).
+- Removed unnecessary genericons font files to reduce theme file size.
+- Renamed the editor style files.
+- Moved theme assets to a new `/assets/` folder.
+- Moved theme includes to a new `/inc/` folder.
+- Deleted the Flickr widget, since Flickr is removing the API it's using.
+- Added theme version to enqueues for cache busting.
+- Added output of widget IDs to the args for registration of widget areas.
+- Removed the mobile menu walker, since it's no longer needed.
+- Removed admin CSS made obsolete a couple of WordPress versions back.
+- Moved the Customizer class to its own file, made it pluggable.
+- Only output custom CSS for the accent color if it is set and differs from the default.
+- Added support for the core custom_logo setting, and updated the old garfunkel_logo setting to only be displayed in the Customizer if you already have a garfunkel_logo image set (kudos to @poena).
+- Removed the post-image image size, and set the post thumbnail size to the size it was using.
+- Removed the title attribute from all links.
+- Updated clearfix to use pseudos instead of a `<div class="clear"></div>` element.
+- Updated CSS reset.
+- Updated links to default to underline.
+- Renamed the "Regular" block editor font size to "Normal", to match expected naming.
+- Removed removal of outline from links, inputs and buttons.
+- Combined all content-[post-format].php files into content.php.
+- Combined index.php, archive.php and search.php into index.php.
+- Combined page.php and single.php into singular.php.
+- Updated the archive template and the full width template to use `singular.php`, with template specific stuff handled by conditionals.
+- Removed "Comments are closed" message.
+- Changed markup to use more semantic HTML5 elements.
+- Added missing escaping.
+- Restructured Post Content CSS to be global, moved them to the new "Element Base" CSS section, and updated other styles accordingly.
+- Grouped block specific styles in a new "Blocks" CSS section.
+- Moved pagination to pagination.php.
+- Made dropdown menus accessible when using keyboard navigation.
+- Prevent output of empty comment actions element.
+- Updated post meta tabs to work with comments disabled (and the comments tab hidden).
+- Updated author role output to use the translated user role.
+- Cleaned up widgets (formatting, escaping, made pluggable).
+- Removed the Dribbble widget.
+- Added unique form and field IDs to the search form.
+- Adjusted widget styles.
+- Converted the theme screenshot to JPG, reducing file size by ~250 KB.
+- Updated Block Editor editor styles.
+- Updated the theme description.
+- Fixed featured image caption links being displayed as block.
 
 Version 1.19 (2019-04-07)
 -------------------------

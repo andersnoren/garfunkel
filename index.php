@@ -5,59 +5,48 @@
 	<div class="wrapper-inner section-inner">
 
 		<?php
-		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-		$total_post_count = wp_count_posts();
-		$published_post_count = $total_post_count->publish;
-		$total_pages = ceil( $published_post_count / $posts_per_page );
-		
-		if ( 1 < $paged ) : ?>
-		
-			<div class="page-title">
-			
-				<h5><?php printf( __( 'Page %1$s of %2$s', 'garfunkel' ), $paged, $wp_query->max_num_pages ); ?></h5>
-				
-			</div>
-			
-			<div class="clear"></div>
-		
-		<?php endif; ?>
 	
-		<div class="content">
-																			                    
-			<?php if ( have_posts() ) : ?>
-			
-				<div class="posts" id="posts">
-						
-					<?php while ( have_posts() ) : the_post();
-					
-						get_template_part( 'content', get_post_format() );
-					
-					endwhile;
-					
-				endif; ?>
-				
-				<div class="clear"></div>
-				
-			</div><!-- .posts -->
-				
-		</div><!-- .content -->
+		$archive_title = get_the_archive_title();
+		$archive_description = get_the_archive_description( '<div>', '</div>' ); 
 		
-		<?php if ( $wp_query->max_num_pages > 1 ) : ?>
+		if ( $archive_title || $archive_description ) : ?>
 			
-			<div class="archive-nav section-inner">
-						
-				<?php echo get_next_posts_link( '&larr; ' . __( 'Older posts', 'garfunkel' ) ); ?>
-							
-				<?php echo get_previous_posts_link( __( 'Newer posts', 'garfunkel' ) . ' &rarr;' ); ?>
+			<header class="archive-header">
+
+				<?php if ( $archive_title ) : ?>
+					<h1 class="archive-title"><?php echo $archive_title; ?></h1>
+				<?php endif; ?>
+
+				<?php if ( $archive_description ) : ?>
+					<div class="archive-description"><?php echo wpautop( $archive_description ); ?></div>
+				<?php endif; ?>
 				
-				<div class="clear"></div>
-				
-			</div><!-- .archive-nav -->
-		
+			</header><!-- .archive-header -->
+
 		<?php endif; ?>
+		
+		<div class="content">
+		
+			<?php if ( have_posts() ) : ?>
+		
+				<div class="posts">
+				
+					<?php while ( have_posts() ) : the_post(); ?>
+					
+						<?php get_template_part( 'content', get_post_format() ); ?>							
+						
+					<?php endwhile; ?>
+								
+				</div><!-- .posts -->
+							
+				<?php get_template_part( 'pagination' ); ?>
+						
+			<?php endif; ?>
+		
+		</div><!-- .content -->
 	
 	</div><!-- .wrapper-inner -->
-	
+
 </div><!-- .wrapper -->
-	              	        
+
 <?php get_footer(); ?>

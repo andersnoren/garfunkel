@@ -32,8 +32,6 @@
 		
 		</div><!-- .content -->
 		
-		<div class="clear"></div>
-		
 	</div><!-- .section-inner -->
 
 </div><!-- .wrapper -->

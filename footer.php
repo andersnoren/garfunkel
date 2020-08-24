@@ -1,10 +1,10 @@
-<div class="credits">
+		<footer class="credits">
 
-	<p>&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo home_url(); ?>" title="<?php bloginfo( 'name' ); ?>"><?php bloginfo( 'name' ); ?></a>. <?php _e( 'Theme by', 'garfunkel' ); ?> <a href="https://www.andersnoren.se">Anders Nor&eacute;n</a>.</p>
-		
-</div><!-- .credits -->
+			<p>&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo home_url(); ?>"><?php bloginfo( 'name' ); ?></a>. <?php _e( 'Theme by', 'garfunkel' ); ?> <a href="https://www.andersnoren.se">Anders Nor&eacute;n</a>.</p>
+				
+		</footer><!-- .credits -->
 
-<?php wp_footer(); ?>
+		<?php wp_footer(); ?>
 
-</body>
+	</body>
 </html>
