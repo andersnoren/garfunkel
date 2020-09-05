@@ -18,9 +18,6 @@ if ( ! function_exists( 'garfunkel_setup' ) ) :
 		// Post thumbnails
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 1140, 9999 );
-
-		// Image sizes
-		add_image_size( 'post-thumbnail', 552, 9999 );
 		
 		// Post formats
 		add_theme_support( 'post-formats', array( 'aside', 'gallery', 'image', 'link', 'quote', 'video' ) );

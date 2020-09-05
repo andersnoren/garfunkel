@@ -2,7 +2,7 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
-Tested up to: 5.5
+Tested up to: 5.5.1
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
@@ -118,7 +118,13 @@ The rest of the content...
 
 == Changelog ==
 
-Version 2.0.0 (2020-08-XX)
+Version 2.0.1 (2020-09-05)
+-------------------------
+- Fixed the post-thumbnail size being set twice (once with set_post_thumbnail_size(), once with add_image_size()) causing the size to be set incorrectly.
+- Updated the changelog with the correct release date for version 2.0.0.
+- Bumped "Tested up to" to 5.5.1.
+
+Version 2.0.0 (2020-08-24)
 -------------------------
 - Added "Requires PHP" tag.
 - Updated "Tested up to" to 5.5.
