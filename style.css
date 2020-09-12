@@ -2,7 +2,7 @@
 
 	Theme Name: Garfunkel
     Text Domain: garfunkel
-	Version: 2.0.1
+	Version: 2.0.2
 	Description: Garfunkel is a stylish and responsive Pinterest-style theme with Masonry layout. It features a responsive and retina-ready design, support for six post formats, Block Editor support, widgets for recent posts and recent comments with thumbnails and avatars, an archive page template, a full-width page template, Jetpack Infinite Scroll support, and editor styles for both the Block Editor and the Classic Editor. Demo: https://www.andersnoren.se/themes/garfunkel/
 	Tags: blog, three-columns, custom-colors, custom-header, custom-menu, editor-style, featured-images, footer-widgets, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, block-styles, wide-blocks
 	Author: Anders Norén
@@ -805,6 +805,7 @@ input[type="submit"] {
 .navigation .section-inner { 
 	align-items: center;
 	display: flex;
+	justify-content: space-between;
 	position: relative; 
 }
 
@@ -1377,14 +1378,19 @@ input[type="submit"] {
 }
 
 .post-quote blockquote {
+	background-color: transparent;
+	border: none;
 	display: block;
 	font-family: 'Playfair Display', serif;
 	font-size: 1.25em;
 	font-weight: 400;
-	line-height: 140%;
+	line-height: 1.4;
+	margin: 0;
+	padding: 0;
 }
 
 .post-quote cite {
+	color: inherit;
 	display: block;
 	margin-top: 20px;
 	font-family: 'Fira Sans', sans-serif;
@@ -1409,29 +1415,31 @@ input[type="submit"] {
 	font-family: 'Fira Sans', sans-serif;
 	font-size: 1.2em;
 	font-weight: 400;
-	line-height: 140%;
+	line-height: 1.4;
+	margin: 0;
 }
 
 .post-link a { 
+	color: inherit; 
 	display: block;
-	margin-top: 5px;
-	text-transform: uppercase;
-	letter-spacing: 1px;
 	font-size: 0.8em;
 	font-weight: 700;
-	color: #fff; 
+	letter-spacing: 1px;
+	margin-top: 5px;
+	text-decoration: none;
+	text-transform: uppercase;
 }
 
 .post-link a:before {
-	font: 32px/1 'Genericons';
 	content: '\f107';
+	font: 32px/1 'Genericons';
 	position: relative;
-	bottom: -11px;
+		bottom: -11px;
 }
 
-.post-link a:hover { color: #fff; }
-
-.post-link a:hover span { text-decoration: underline; }
+.post-link a:hover span { 
+	text-decoration: underline; 
+}
 
 
 /* -------------------------------------------------------------------------------- */

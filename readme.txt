@@ -118,6 +118,12 @@ The rest of the content...
 
 == Changelog ==
 
+Version 2.0.2 (2020-09-12)
+-------------------------
+- Fixed the navigation bar in the top displaying both the main menu and the social menu to the left.
+- Fixed the display of blockquotes in the Quote post format on archive pages.
+- Fixed the display of links in the Link post format on archive pages.
+
 Version 2.0.1 (2020-09-05)
 -------------------------
 - Fixed the post-thumbnail size being set twice (once with set_post_thumbnail_size(), once with add_image_size()) causing the size to be set incorrectly.

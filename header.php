@@ -24,7 +24,7 @@
 	
 		<div class="navigation">
 		
-			<div class="section-inner group">
+			<div class="section-inner">
 				
 				<ul class="main-menu">
 				
