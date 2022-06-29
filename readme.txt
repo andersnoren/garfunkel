@@ -118,6 +118,12 @@ The rest of the content...
 
 == Changelog ==
 
+Version 2.1 (2022-06-29)
+-------------------------
+- Switched from the Google Fonts CDN to font files included in the theme folder.
+- Bumped "Tested up to" to 6.0.
+- Removed the www prefix from andersnoren.se URLs.
+
 Version 2.0.2 (2020-09-12)
 -------------------------
 - Fixed the navigation bar in the top displaying both the main menu and the social menu to the left.

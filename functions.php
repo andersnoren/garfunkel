@@ -97,15 +97,8 @@ if ( ! function_exists( 'garfunkel_load_style' ) ) :
 		$dependencies = array();
 		$theme_version = wp_get_theme( 'garfunkel' )->get( 'Version' );
 
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'garfunkel' ) ) {
-			wp_register_style( 'garfunkel_googleFonts', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,700italic|Playfair+Display:400,900|Crimson+Text:700,400italic,700italic,400' );
-			$dependencies[] = 'garfunkel_googleFonts';
-		}
+		wp_register_style( 'garfunkel_googleFonts', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		$dependencies[] = 'garfunkel_googleFonts';
 
 		wp_register_style( 'garfunkel_genericons', get_template_directory_uri() . '/assets/css/genericons.min.css' );
 		$dependencies[] = 'garfunkel_genericons';
@@ -124,17 +117,7 @@ endif;
 if ( ! function_exists( 'garfunkel_add_editor_styles' ) ) :
 	function garfunkel_add_editor_styles() {
 
-		add_editor_style( 'assets/css/garfunkel-classic-editor-styles.css' );
-
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'garfunkel' ) ) {
-			$font_url = '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,700italic|Playfair+Display:400,900|Crimson+Text:700,400italic,700italic,400';
-			add_editor_style( str_replace( ',', '%2C', $font_url ) );
-		}
+		add_editor_style( array( 'assets/css/garfunkel-classic-editor-styles.css', 'assets/css/fonts.css' ) );
 
 	}
 	add_action( 'init', 'garfunkel_add_editor_styles' );
@@ -670,21 +653,10 @@ endif;
 if ( ! function_exists( 'garfunkel_block_editor_styles' ) ) :
 	function garfunkel_block_editor_styles() {
 
-		$dependencies = array();
 		$theme_version = wp_get_theme( 'garfunkel' )->get( 'Version' );
 
-		/**
-		 * Translators: If there are characters in your language that are not
-		 * supported by the theme fonts, translate this to 'off'. Do not translate
-		 * into your own language.
-		 */
-		if ( 'off' !== _x( 'on', 'Google Fonts: on or off', 'garfunkel' ) ) {
-			wp_register_style( 'garfunkel-block-editor-styles-font', '//fonts.googleapis.com/css?family=Fira+Sans:400,500,700,400italic,700italic|Playfair+Display:400,900|Crimson+Text:700,400italic,700italic,400' );
-			$dependencies[] = 'garfunkel-block-editor-styles-font';
-		}
-
-		// Enqueue the editor styles
-		wp_enqueue_style( 'garfunkel-block-editor-styles', get_theme_file_uri( '/assets/css/garfunkel-block-editor-styles.css' ), $dependencies, $theme_version, 'all' );
+		wp_register_style( 'garfunkel-block-editor-styles-font', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_enqueue_style( 'garfunkel-block-editor-styles', get_theme_file_uri( '/assets/css/garfunkel-block-editor-styles.css' ), array( 'garfunkel-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'garfunkel_block_editor_styles', 1 );
