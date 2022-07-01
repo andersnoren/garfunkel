@@ -97,7 +97,7 @@ if ( ! function_exists( 'garfunkel_load_style' ) ) :
 		$dependencies = array();
 		$theme_version = wp_get_theme( 'garfunkel' )->get( 'Version' );
 
-		wp_register_style( 'garfunkel_googleFonts', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'garfunkel_googleFonts', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		$dependencies[] = 'garfunkel_googleFonts';
 
 		wp_register_style( 'garfunkel_genericons', get_template_directory_uri() . '/assets/css/genericons.min.css' );
@@ -655,7 +655,7 @@ if ( ! function_exists( 'garfunkel_block_editor_styles' ) ) :
 
 		$theme_version = wp_get_theme( 'garfunkel' )->get( 'Version' );
 
-		wp_register_style( 'garfunkel-block-editor-styles-font', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'garfunkel-block-editor-styles-font', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		wp_enqueue_style( 'garfunkel-block-editor-styles', get_theme_file_uri( '/assets/css/garfunkel-block-editor-styles.css' ), array( 'garfunkel-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}

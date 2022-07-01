@@ -118,6 +118,10 @@ The rest of the content...
 
 == Changelog ==
 
+Version 2.1.1 (2022-07-01)
+-------------------------
+- Improved fonts.css enqueue for child themes.
+
 Version 2.1 (2022-06-29)
 -------------------------
 - Switched from the Google Fonts CDN to font files included in the theme folder.
