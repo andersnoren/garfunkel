@@ -2,7 +2,7 @@
 
 Garfunkel is a stylish and responsive Pinterest-style theme with Masonry layout. It features a responsive and retina-ready design, support for six post formats, Block Editor support, widgets for recent posts and recent comments with thumbnails and avatars, an archive page template, a full-width page template, Jetpack Infinite Scroll support, and editor styles for both the Block Editor and the Classic Editor.
 
-![Garfunkel](https://github.com/andersnoren/garfunkel/blob/main/screenshot.png)
+![Garfunkel](https://github.com/andersnoren/garfunkel/blob/master/screenshot.jpg)
 
 You can download the latest stable release of Garfunkel [from WordPress.org](https://wordpress.org/themes/garfunkel/).
 
