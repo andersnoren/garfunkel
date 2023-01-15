@@ -50,7 +50,50 @@ if ( ! class_exists( 'Garfunkel_Customize' ) ) :
 
 			}
 
-		}
+			/* Garfunkel Section ------------- */
+
+            $wp_customize->add_section(
+                'garfunkel_options', array(
+                'title' => __('Garfunkel', 'garfunkel'),
+                'description' => '',
+                'priority' => 120,
+                )
+            );
+
+			/* Show Categories in Meta ------- */
+
+            $wp_customize->add_setting(
+                'garfunkel_show_categories', array(
+                'default' => ''
+                )
+            );
+
+            $wp_customize->add_control(
+                'garfunkel_show_categories', array(
+                'label' => 'Show categories on archive pages.',
+                'type'  => 'checkbox',
+                'section' => 'garfunkel_options',
+                'settings' => 'garfunkel_show_categories'
+                )
+            );
+
+			/* Show Tags in Meta ------------- */
+
+            $wp_customize->add_setting(
+                'garfunkel_show_tags', array(
+                'default' => ''
+                )
+            );
+
+            $wp_customize->add_control(
+                'garfunkel_show_tags', array(
+                'label' => 'Show tags on archive pages.',
+                'type'  => 'checkbox',
+                'section' => 'garfunkel_options',
+                'settings' => 'garfunkel_show_tags'
+                )
+            );
+        }
 
 		public static function header_output() {
 
