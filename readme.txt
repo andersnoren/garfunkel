@@ -118,6 +118,10 @@ The rest of the content...
 
 == Changelog ==
 
+Version 2.1.2 (2023-05-01)
+-------------------------
+- Fixed incorrect loading of Playfair Display 900 (thanks, suessbot).
+
 Version 2.1.1 (2022-07-01)
 -------------------------
 - Improved fonts.css enqueue for child themes.
