@@ -4,25 +4,25 @@
    CUSTOMIZER SETTINGS
    --------------------------------------------------------------------------------------------- */
 
-if ( ! class_exists( 'Garfunkel_Customize' ) ) : 
+if ( ! class_exists( 'Garfunkel_Customize' ) ) :
 	class Garfunkel_Customize {
 
 		public static function register( $wp_customize ) {
 
 			/* Accent Color ------------------ */
-			
+
 			$wp_customize->add_setting( 'accent_color', array(
-				'default' 			=> '#ca2017', 
-				'type' 				=> 'theme_mod', 
-				'capability' 		=> 'edit_theme_options', 
+				'default' 			=> '#ca2017',
+				'type' 				=> 'theme_mod',
+				'capability' 		=> 'edit_theme_options',
 				'sanitize_callback' => 'sanitize_hex_color'
 			) );
-			
+
 			$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'garfunkel_accent_color', array(
-				'label' 	=> __( 'Accent Color', 'garfunkel' ), 
-				'section' 	=> 'colors', 
-				'settings' 	=> 'accent_color', 
-				'priority' 	=> 10, 
+				'label' 	=> __( 'Accent Color', 'garfunkel' ),
+				'section' 	=> 'colors',
+				'settings' 	=> 'accent_color',
+				'priority' 	=> 10,
 			) ) );
 
 			/* Custom Logo ------------------- */
@@ -37,8 +37,8 @@ if ( ! class_exists( 'Garfunkel_Customize' ) ) :
 					'priority'    => 40,
 					'description' => 'Upload a logo to replace the default site name and description in the header',
 				) );
-				
-				$wp_customize->add_setting( 'garfunkel_logo', array( 
+
+				$wp_customize->add_setting( 'garfunkel_logo', array(
 					'sanitize_callback' => 'esc_url_raw'
 				) );
 
@@ -50,7 +50,50 @@ if ( ! class_exists( 'Garfunkel_Customize' ) ) :
 
 			}
 
-		}
+			/* Garfunkel Section ------------- */
+
+			$wp_customize->add_section(
+			    'garfunkel_options', array(
+			    'title' => __('Garfunkel', 'garfunkel'),
+			    'description' => '',
+			    'priority' => 120,
+			    )
+			);
+
+			/* Show Categories in Meta ------- */
+
+			$wp_customize->add_setting(
+			    'garfunkel_show_categories', array(
+			    'default' => ''
+			    )
+			);
+
+			$wp_customize->add_control(
+			    'garfunkel_show_categories', array(
+			    'label' => 'Show categories on archive pages.',
+			    'type'  => 'checkbox',
+			    'section' => 'garfunkel_options',
+			    'settings' => 'garfunkel_show_categories'
+			    )
+			);
+
+			/* Show Tags in Meta ------------- */
+
+			$wp_customize->add_setting(
+			    'garfunkel_show_tags', array(
+			    'default' => ''
+			    )
+			);
+
+			$wp_customize->add_control(
+			    'garfunkel_show_tags', array(
+			    'label' => 'Show tags on archive pages.',
+			    'type'  => 'checkbox',
+			    'section' => 'garfunkel_options',
+			    'settings' => 'garfunkel_show_tags'
+			    )
+			);
+        }
 
 		public static function header_output() {
 
@@ -59,7 +102,7 @@ if ( ! class_exists( 'Garfunkel_Customize' ) ) :
 
 			// Only output Custom CSS if it differs from the default
 			if ( $accent == $accent_default ) return;
-		
+
 			echo '<!--Customizer CSS-->';
 			echo '<style type="text/css">';
 
@@ -131,7 +174,7 @@ if ( ! class_exists( 'Garfunkel_Customize' ) ) :
 
 			echo '</style>';
 			echo '<!--/Customizer CSS-->';
-			
+
 		}
 
 		public static function generate_css( $selector, $style, $value, $prefix = '', $postfix = '', $echo = true ) {

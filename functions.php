@@ -415,12 +415,52 @@ if ( ! function_exists( 'garfunkel_meta' ) ) :
 				<span class="meta-text"><?php the_time( get_option( 'date_format' ) ); ?></span>
 			</a>
 
-			<?php if ( comments_open() ) : ?>
-				<a class="post-meta-comments" href="<?php the_permalink(); ?>#comments">
-					<div class="genericon genericon-comment"></div>
-					<span class="meta-text"><?php comments_number( '0', '1', '%' ); ?></span>
-				</a>
-			<?php endif; ?>
+		<?php if( get_theme_mod( 'garfunkel_show_categories' ) ) : ?>
+			<a class="post-meta-categories" href="<?php the_permalink(); ?>">
+			<?php
+				$categories = get_the_category();
+			    $separator = ', ';
+			    $output = '';
+			    if( is_array( $categories ) && count( $categories ) > 0 ) {
+					echo '				<div class="genericon genericon-category"></div>' . PHP_EOL;
+					echo '				<span class="meta-text">' . PHP_EOL;
+
+			        foreach ( $categories as $category ) {
+			            $output .= esc_html( $category->name ) . $separator;
+			        }
+
+		        	echo trim( $output, $separator );
+			    }
+				?></span>
+			</a>
+		<?php endif; ?>
+
+		<?php if( get_theme_mod( 'garfunkel_show_tags' ) ) : ?>
+			<a class="post-meta-tags" href="<?php the_permalink(); ?>">
+			<?php
+				$tags = get_the_tags();
+			    $separator = ', ';
+			    $output = '';
+			    if( is_array( $tags ) && count( $tags ) > 0 ) {
+					echo '				<div class="genericon genericon-tag"></div>' . PHP_EOL;
+					echo '				<span class="meta-text">' . PHP_EOL;
+
+			        foreach ( $tags as $tag ) {
+			            $output .= esc_html( $tag->name ) . $separator;
+			        }
+
+			        echo trim( $output, $separator );
+			    }
+				?></span>
+			</a>
+		<?php endif; ?>
+
+		<?php if ( comments_open() ) : ?>
+			<a class="post-meta-comments" href="<?php the_permalink(); ?>#comments">
+				<div class="genericon genericon-comment"></div>
+				<span class="meta-text"><?php comments_number( '0', '1', '%' ); ?></span>
+			</a>
+		<?php endif; ?>
 
 		</div><!-- .post-meta -->
 		
