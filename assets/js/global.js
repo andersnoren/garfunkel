@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 		$(".post-container").fadeIn();
 	});
 
-	$(window).resize(function () {
+	$(window).on('resize', function () {
 		$blocks.masonry();
 	});
 
@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
 	
 	
 	// Show navigation > 800
-	$(window).resize(function() {
+	$(window).on('resize', function() {
 		if ($(window).width() > 800) {
 			$(".mobile-menu-container").hide();
 			$('.nav-toggle').removeClass('active');
@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 	
 	
 	// Post meta tabs
-    $( '.tab-selector a' ).click( function() {
+    $( '.tab-selector a' ).on( 'click', function() {
 		$( '.tab-selector a' ).removeClass( 'active' );
 		$( this ).addClass( 'active' );
     	$( '.post-meta-tabs .tab' ).removeClass( 'active' );
@@ -56,7 +56,7 @@ jQuery(document).ready(function($) {
         prevText: "Previous",
         nextText: "Next",
         smoothHeight: true,
-        start: $blocks.masonry(),
+        start: function() { $blocks.masonry(); },
     });
 
         			
@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
 
 	resizeVideo(vidSelector);
 
-	$(window).resize(function() {
+	$(window).on('resize', function() {
 		resizeVideo(vidSelector);
 	});
     

@@ -25,4 +25,4 @@ Do you want to support the continued development of Garfunkel? You can send me a
 
 ## Resources
 - [About Garfunkel](https://andersnoren.se/teman/garfunkel-wordpress-theme/)
-- [Garfunkel demo site](https://andersnoren.se/themes/garfunkel/)
+- [Garfunkel demo site](https://garfunkel.andersnoren.se)

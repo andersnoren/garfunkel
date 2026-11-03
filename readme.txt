@@ -2,11 +2,18 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
-Tested up to: 5.5.1
+Tested up to: 7.1
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+A stylish and responsive Pinterest-style theme with a Masonry layout.
+
+
+== Description ==
+
+Garfunkel is a stylish and responsive Pinterest-style theme with Masonry layout. It features a responsive and retina-ready design, support for six post formats, Block Editor support, widgets for recent posts and recent comments with thumbnails and avatars, an archive page template, a full-width page template, Jetpack Infinite Scroll support, and editor styles for both the Block Editor and the Classic Editor. Demo: https://garfunkel.andersnoren.se
 
 
 == Installation ==
@@ -15,6 +22,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 2. Activate the theme
 
 All theme specific options are handled through the WordPress Customizer.
+
+
+== Copyright ==
+
+Garfunkel WordPress Theme, Copyright 2014-2026 Anders Norén
+Garfunkel is distributed under the terms of the GNU GPL.
 
 
 == Licenses ==
@@ -27,7 +40,7 @@ Crimson Text
 License: SIL Open Font License, 1.1 
 Source: https://fonts.google.com/specimen/Crimson+Text
 
-Playfai Display
+Playfair Display
 License: SIL Open Font License, 1.1 
 Source: https://fonts.google.com/specimen/Playfair+Display
 
@@ -37,7 +50,7 @@ Source: http://genericons.com
 
 Standard header image
 License: CC0 Public Domain 
-Source: http://www.unsplash.com
+Source: Unsplash (added before the 2017 change to the Unsplash license, when its photos were released under CC0)
 
 Flexslider jQuery Slider
 License: GNU GPL 2.0
@@ -46,8 +59,13 @@ Source: http://flexslider.woothemes.com
 
 == Frequently Asked Questions ==
 
+= Where can I get support? =
+Post your question in the Garfunkel support forum on WordPress.org: https://wordpress.org/support/theme/garfunkel/
 
-== Display the social menu in the navigation bar
+= Where can I request a feature or report a bug? =
+Open an issue in the Garfunkel GitHub repository: https://github.com/andersnoren/garfunkel
+
+= How do I display the social menu in the navigation bar? =
 
 1. Go to Admin > Appearance > Menus.
 2. Create a new menu.
@@ -59,7 +77,7 @@ Source: http://flexslider.woothemes.com
 For a list of all social icons supported, visit http://genericons.com/.
 
 
-== Use the gallery post format
+= How do I use the gallery post format? =
 
 1. Go to Admin > Posts > Add New.
 2. Select the "Gallery" post format in the Post Attributes box.
@@ -68,7 +86,7 @@ For a list of all social icons supported, visit http://genericons.com/.
 5. The images you uploaded should now be displayed in the post gallery.
 
 
-== Link Format
+= How do I use the link post format? =
 
 1. Create a new post.
 2. Select "Link" in the Format window to the right.
@@ -84,7 +102,7 @@ The rest of the content...
 6. The link title and link will now be displayed in a separate section from the content of your post.
 
 
-== Quote Format
+= How do I use the quote post format? =
 
 1. Create a new post.
 2. Select "Quote" in the Format window to the right.
@@ -101,7 +119,7 @@ The rest of the content...
 6. The quote will now be displayed in a separate section from the content of your post.
 
 
-== Video Format
+= How do I use the video post format? =
 
 1. Create a new post.
 2. Select "Video" in the Format window to the right.
@@ -117,6 +135,17 @@ The rest of the content...
 
 
 == Changelog ==
+
+Version 2.1.3 (2026-11-03)
+-------------------------
+- Tested with WordPress 7.1.
+- Fixed Jetpack Infinite Scroll adding the contents of the page <head> to the page when loading more posts.
+- Replaced deprecated jQuery methods (.resize(), .click(), .bind(), .unbind(), .delegate(), .hover(), .blur() and .focus()) with .on() and .off().
+- Fixed the block editor styles not loading in the iframed editor.
+- Fixed a JavaScript error when loading the gallery slider.
+- Updated the demo URL.
+- Added the Requires at least header to style.css, and updated the Tested up to header in readme.txt to match style.css.
+- Added Description, Copyright and Upgrade Notice sections to the readme, fixed the FAQ formatting, and updated the image source notes.
 
 Version 2.1.2 (2023-05-01)
 -------------------------
@@ -320,3 +349,9 @@ Version 1.01 (2014-08-25)
 
 Version 1.0 (2014-07-XX)
 -------------------------
+
+
+== Upgrade Notice ==
+
+= 2.1.3 =
+Tested with WordPress 7.1. Fixes Jetpack Infinite Scroll and the block editor styles in the iframed editor.
