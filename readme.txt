@@ -136,6 +136,13 @@ The rest of the content...
 
 == Changelog ==
 
+Version 2.1.4 (2026-11-09)
+-------------------------
+- Made the mobile menu toggle a button, so screen readers announce it as a button and whether the menu is open, and so tapping it no longer jumps to the top of the page.
+- Converted the Genericons icon font from WOFF to WOFF2, which is smaller and supported by all browsers that WordPress supports.
+- Removed vendor prefixes that are no longer needed, and replaced the rest with their standard equivalents where available.
+- Fixed the placeholder text color not being applied in Firefox.
+
 Version 2.1.3 (2026-11-03)
 -------------------------
 - Tested with WordPress 7.1.
@@ -352,6 +359,9 @@ Version 1.0 (2014-07-XX)
 
 
 == Upgrade Notice ==
+
+= 2.1.4 =
+Makes the mobile menu toggle accessible, switches the icon font to the smaller WOFF2 format, removes outdated CSS, and fixes the placeholder color in Firefox.
 
 = 2.1.3 =
 Tested with WordPress 7.1. Fixes Jetpack Infinite Scroll and the block editor styles in the iframed editor.

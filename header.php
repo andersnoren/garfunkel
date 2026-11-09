@@ -83,20 +83,20 @@
 			
 				<div class="toggle-container">
 			
-					<a class="nav-toggle group" href="#">
+					<button type="button" class="nav-toggle group" aria-expanded="false">
 				
-						<div class="bars">
-							<div class="bar"></div>
-							<div class="bar"></div>
-							<div class="bar"></div>
-						</div>
+						<span class="bars" aria-hidden="true">
+							<span class="bar"></span>
+							<span class="bar"></span>
+							<span class="bar"></span>
+						</span>
 						
-						<p>
+						<span class="label">
 							<span class="menu"><?php _e( 'Menu', 'garfunkel' ); ?></span>
 							<span class="close"><?php _e( 'Close', 'garfunkel' ); ?></span>
-						</p>
+						</span>
 					
-					</a>
+					</button>
 				
 				</div><!-- .toggle-container -->
 

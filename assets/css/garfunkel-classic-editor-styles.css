@@ -182,11 +182,8 @@ body#tinymce.wp-editor address {
 }
 
 body#tinymce.wp-editor pre {
-	white-space: pre-wrap;       /* css-3 */
-	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-	white-space: -pre-wrap;      /* Opera 4-6 */
-	white-space: -o-pre-wrap;    /* Opera 7 */
-	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	white-space: pre-wrap;
+	word-wrap: break-word;
 	line-height: 140%;
 	padding: 2% 2.5%;
 	background: #333;
@@ -338,7 +335,7 @@ body#tinymce.wp-editor textarea {
 	background: #fdfdfd;
 	border-radius: 4px;
 	transition: background 0.2s ease-in-out;
-	-webkit-appearance: none;
+	appearance: none;
 }
 
 body#tinymce.wp-editor textarea { 
@@ -364,7 +361,7 @@ body#tinymce.wp-editor input[type="button"] {
 	color: #fff;
 	font-size: 0.9rem;
 	line-height: 1;
-	-webkit-appearance: none;
+	appearance: none;
 	border-radius: 3px;
 }
 

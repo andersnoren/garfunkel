@@ -20,6 +20,7 @@ jQuery(document).ready(function($) {
 	// Toggle navigation
 	$(".nav-toggle").on("click", function(){	
 		$(this).toggleClass("active");
+		$(this).attr("aria-expanded", $(this).hasClass("active") ? "true" : "false");
 		$(".mobile-menu-container").slideToggle();
 	});
 	
@@ -28,7 +29,7 @@ jQuery(document).ready(function($) {
 	$(window).on('resize', function() {
 		if ($(window).width() > 800) {
 			$(".mobile-menu-container").hide();
-			$('.nav-toggle').removeClass('active');
+			$('.nav-toggle').removeClass('active').attr('aria-expanded', 'false');
 		}
 	});
 

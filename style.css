@@ -2,7 +2,7 @@
 
 	Theme Name: Garfunkel
     Text Domain: garfunkel
-	Version: 2.1.3
+	Version: 2.1.4
 	Description: Garfunkel is a stylish and responsive Pinterest-style theme with Masonry layout. It features a responsive and retina-ready design, support for six post formats, Block Editor support, widgets for recent posts and recent comments with thumbnails and avatars, an archive page template, a full-width page template, Jetpack Infinite Scroll support, and editor styles for both the Block Editor and the Classic Editor. Demo: https://garfunkel.andersnoren.se
 	Tags: blog, three-columns, custom-colors, custom-header, custom-menu, editor-style, featured-images, footer-widgets, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, grid-layout, portfolio, block-styles, wide-blocks
 	Author: Anders Norén
@@ -112,8 +112,7 @@ img {
 	color: #FFF;
 }
 
-::-webkit-input-placeholder { color: #999; }
-:-ms-input-placeholder { color: #999; }
+::placeholder { color: #999; opacity: 1; }
 
 /* Clearing ---------------------------------- */
 
@@ -497,7 +496,7 @@ textarea {
 	padding: 14px 16px;
 	transition: background-color 0.2s ease-in-out;
 	width: 100%;
-	-webkit-appearance: none;
+	appearance: none;
 }
 
 textarea { 
@@ -542,8 +541,7 @@ input[type="submit"] {
 	line-height: 1;
 	margin: 0;
 	padding: 18px 24px;
-	-moz-appearance: none;
-	-webkit-appearance: none;
+	appearance: none;
 }
 
 /* STYLE: OUTLINE */
@@ -728,14 +726,18 @@ input[type="submit"] {
 .nav-toggle { 
 	display: block;
 	padding: 14px; 
+	border: none;
 	border-radius: 0 0 2px 2px;
 	background: #1D1D1D;
+	color: #fff;
+	font-family: inherit;
 	position: absolute;
 	top: 0;
 	right: 0;
 }
 
 .nav-toggle .bars {
+	display: block;
 	height: 10px;
 	width: 15px;
 	float: right;
@@ -748,6 +750,7 @@ input[type="submit"] {
 	height: 2px;
 	background: #fff;
 	border-radius: 2px;
+	display: block;
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -756,8 +759,9 @@ input[type="submit"] {
 .nav-toggle .bar:nth-child(2) { top: 4px; }
 .nav-toggle .bar:nth-child(3) { top: 8px; }
 
-.nav-toggle p {
+.nav-toggle .label {
 	color: #fff;
+	display: block;
 	float: right;
 	font-size: 14px;
 	font-weight: 700;
@@ -780,14 +784,10 @@ input[type="submit"] {
 
 .nav-toggle.active .bar:nth-child(1) {
 	transform: rotate(45deg); 
-	-moz-transform: rotate(45deg);  
-	-webkit-transform: rotate(45deg); 
 }
 
 .nav-toggle.active .bar:nth-child(3) { 
 	transform: rotate(-45deg); 
-	-moz-transform: rotate(-45deg);  
-	-webkit-transform: rotate(-45deg); 
 }
 
 .nav-toggle.active .menu { display: none; }
@@ -1241,7 +1241,6 @@ input[type="submit"] {
 	font-weight: 700;
 	line-height: 120%;
 	margin: 0 0 10px;
-		-ms-word-break: break-word;
 	word-break: break-word;
 }
 
@@ -1671,7 +1670,6 @@ input[type="submit"] {
 	margin: 5px 0 0;
 	color: #333;
 	word-break: break-word;
-	-ms-word-break: break-word;
 }
 
 .tab-post-meta .post-nav a:hover h4 { color: #ca2017; }
@@ -2924,7 +2922,6 @@ p.comment-form-author {
 	line-height: 120%;
 	margin: 0;
 	word-break: break-word;
-	-ms-word-break: break-word;
 }
 
 .widget_garfunkel_recent_posts .meta,
